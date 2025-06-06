@@ -167,24 +167,57 @@ export default struct ZhiHuCommentDemo {
   ];
 
   build() {
-    Column() {
-      NavHeader()
-      Scroll() {
-        Column() {
-          ForEach(this.mockData, (item: mockDataType) => {
-            CommentContent({ items: item })
-          }, (item: mockDataType) => item.user_id)
+    Stack({ alignContent: Alignment.Bottom }) {
+      Column() {
+        NavHeader()
+        CommentContent({ items: this.mockData[0] })
+        Divider()
+          .strokeWidth(6)
+          .color('#f4f4f4')
+        Scroll() {
+          Column() {
+            Text(`回复 ${this.mockData.length - 1}`)
+              .width('100%')
+              .fontSize(18)
+              .margin({ left: 24, top: 12 })
+            ForEach(this.mockData, (item: mockDataType, index: number) => {
+              if (index !== 0) {
+                CommentContent({ items: item })
+              }
+            }, (item: mockDataType) => item.user_id)
 
-          Text('暂时没有更多了')
-            .width('100%')
-            .height(40)
-            .fontSize(12)
-            .textAlign(TextAlign.Center)
-            .fontColor('#cccccc')
+            Text('暂时没有更多了')
+              .width('100%')
+              .height(40)
+              .fontSize(12)
+              .textAlign(TextAlign.Center)
+              .fontColor('#cccccc')
+          }
         }
+        .layoutWeight(1)
+        .scrollBarWidth(0)
       }
-      .layoutWeight(1)
-      .scrollBarWidth(0)
+
+      Row({space: 16}){
+        TextInput({ placeholder: '回复~' })
+          .layoutWeight(1)
+          .backgroundColor('#f4f5f6')
+          .placeholderColor('#cccccc')
+        Text('发布')
+          .width(42)
+          .fontSize(18)
+          .fontColor('#6ecff0')
+      }
+      .width('100%')
+      .height(60)
+      .backgroundColor(Color.White)
+      .border({
+        color: '#f4f5f6',
+        width: {
+          top: 1
+        }
+      })
+      .padding({ left: 12, right: 12 })
     }
   }
 }
