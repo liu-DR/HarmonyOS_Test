@@ -195,8 +195,10 @@ export default struct ZhiHuCommentDemo {
       "isLike": false
     }
   ];
+  @State commValue: string = '';
 
-  handleClickLike(items: mockDataType){
+  // 点赞
+  handleClickLike = (items: mockDataType) => {
     if(items.isLike) {
       items.isLike = false;
       items.likes--;
@@ -210,27 +212,34 @@ export default struct ZhiHuCommentDemo {
     this.mockData.splice(index, 1, items);
   }
 
+  // 发布评论
+  addCommend = (comm: mockDataType) => {
+
+  }
+
   build() {
     Stack({ alignContent: Alignment.Bottom }) {
       Column() {
         NavHeader()
-        CommentContent({ items: this.mockData[0], handleClickLike: (items: mockDataType) => {
-          this.handleClickLike(items)
-        } })
+        CommentContent({
+          items: this.mockData[0],
+          handleClickLike: this.handleClickLike,
+        })
         Divider()
           .strokeWidth(6)
           .color('#f4f4f4')
         Scroll() {
           Column() {
             Text(`回复 ${this.mockData.length - 1}`)
-              .width('100%')
+               .width('100%')
               .fontSize(18)
               .margin({ left: 24, top: 12 })
             ForEach(this.mockData, (item: mockDataType, index: number) => {
               if (index !== 0) {
-                CommentContent({ items: item, handleClickLike: (items: mockDataType) => {
-                  this.handleClickLike(items)
-                } })
+                CommentContent({
+                  items: item,
+                  handleClickLike: this.handleClickLike,
+                })
               }
             })
 
@@ -250,14 +259,29 @@ export default struct ZhiHuCommentDemo {
       }
 
       Row({space: 16}){
-        TextInput({ placeholder: '回复~' })
+        TextInput({ placeholder: '回复~', text: this.commValue })
           .layoutWeight(1)
           .backgroundColor('#f4f5f6')
           .placeholderColor('#cccccc')
+          .onChange((val: string) => {
+            this.commValue = val;
+          })
         Text('发布')
           .width(42)
           .fontSize(18)
           .fontColor('#6ecff0')
+          .onClick(() => {
+            const commObj: mockDataType = {
+              user_id: `${new Date()}`,
+              username: '福建第一贝利亚',
+              comment: this.commValue,
+              likes: 0,
+              comment_time: `${new Date().getMonth()}-${new Date().getDay()}`,
+              isLike: false
+            };
+            this.mockData.splice(1, 0, commObj);
+            this.commValue = '';
+          })
       }
       .width('100%')
       .height(60)
