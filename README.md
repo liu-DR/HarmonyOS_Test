@@ -23,7 +23,7 @@
     - **@Entry**：使用@Entry装饰的组件，在页面加载时会首先创建并默认展示，并且一个页面有且只能有一个@Entry
     - **@Component**：表示该部分代码内容为一个自定义组件
     - **@State**：用于定义一个状态变量，表示组件内状态
-    - **Prop**：用于装饰从父组件传递的变量属性，不能双向同步
+    - **@Prop**：用于装饰从父组件传递的变量属性，不能双向同步
     - **@Link**：在子组件中使用，用于装饰从父组件中传递的属性建立双向数据绑定，子组件修改，父组件会同步更新
     - **@Provide和@Consume**：用于装饰祖先组件和后代子组件的双向数据通信，祖先组件中使用Provide定义数据，后代不同层级之间通过命名机制传递
       - 使用方法
@@ -71,6 +71,15 @@
 - #### 网络管理
   1、应用权限：system_grant(系统权限)和user_grant(用户授权)
 
+
+- #### ArkTS API
+  - setSpecificSystemBarEnabled(name, enable, enableAnimation)：设置主窗口状态栏、底部导航区域的显示和隐藏，使用Promise异步回调。
+    - **name**: 需要设置显示或隐藏的系统栏类型 'status'-顶部状态栏、'navigation'-三键导航栏(HarmonyOS系统不支持该能力)、'navigationIndicator'-底部导航栏
+    - **enable**: 窗口全屏模式下显示或隐藏状态栏或导航栏
+    - **enableAnimation**: 设置状态栏或底部导航区域显示状态变化时是否使用动画
+  - startAbility({ bundleName, abilityName })：启动拉起一个新的Ability窗口，创建一个新的进程窗口
+    - **bundleName**：取AppScope/app.json5文件中的bundleName字段
+    - **abilityName**：取entry/src/main/module.json5中，abilities字段中自己新增的那个ability应用的name字段
 
 
 ### 问题搜集

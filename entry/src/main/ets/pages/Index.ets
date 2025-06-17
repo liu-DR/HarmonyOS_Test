@@ -1,6 +1,9 @@
+import { promptAction, router } from '@kit.ArkUI';
+import { common } from '@kit.AbilityKit';
+
 import MusicRecommendHeader from './MusicRecommend/MusicHome';
 import ZhiHuCommentDemo from './demos/ZhiHuCommentDemo';
-import { router } from '@kit.ArkUI';
+import { BusinessError } from '@kit.BasicServicesKit';
 
 PersistentStorage.persistProp<appStorageType>('userInfo', {
   user_token: '123456789',
@@ -19,6 +22,9 @@ export interface appStorageType {
 @Component
 struct Index {
   @StorageProp('userInfo') userInfo: Partial<appStorageType> = {};
+  @StorageProp('abilityParams') abilityParams: string = '';
+
+  @State isShow: boolean = false;
 
   build() {
     Column({ space: 12 }) {
@@ -38,6 +44,38 @@ struct Index {
 
             router.pushUrl({
               url: 'pages/demos/AppStorageDemo'
+            })
+          })
+
+        Button('点击前往美团外卖')
+          .onClick(() => {
+            router.pushUrl({
+              url: 'pages/demos/MeituanWaimai/Index'
+            })
+          });
+
+        if(this.isShow) {
+          Button('是否展示我')
+        }
+
+        Button('唤醒一个新进程')
+          .onClick(async () => {
+            const context = this.getUIContext()?.getHostContext() as common.UIAbilityContext;
+            context.startAbilityForResult({
+              bundleName: 'com.example.myapplication',
+              abilityName: 'CloudMusicAbility',
+              parameters: {
+                abilityParams: {
+                  id: JSON.stringify(new Date().getTime())
+                }
+              }
+            }).then((result: common.AbilityResult) => {
+              console.info('startAbilityForResult succeed 1111111111');
+              if(result.want?.parameters?.id) {
+                this.isShow = true;
+              }
+            }).catch((err: BusinessError) => {
+              console.error(`startAbilityForResult failed, code is ${err.code}, message is ${err.message}`)
             })
           })
       }

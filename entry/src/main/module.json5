@@ -12,9 +12,11 @@
     "deliveryWithInstall": true,
     "installationFree": false,
     "pages": "$profile:main_pages",
-    "requestPermissions": [{
-      "name": "ohos.permission.INTERNET"
-    }],
+    "requestPermissions": [
+      {
+        "name": "ohos.permission.INTERNET"
+      }
+    ],
     "abilities": [
       {
         "name": "EntryAbility",
@@ -35,6 +37,15 @@
             ]
           }
         ]
+      },
+      {
+        "name": "CloudMusicAbility",
+        "srcEntry": "./ets/cloudmusicability/CloudMusicAbility.ets",
+        "description": "$string:CloudMusicAbility_desc",
+        "icon": "$media:layered_image",
+        "label": "$string:CloudMusicAbility_label",
+        "startWindowIcon": "$media:startIcon",
+        "startWindowBackground": "$color:start_window_background"
       }
     ],
     "extensionAbilities": [
