@@ -78,9 +78,16 @@ struct Index {
               console.error(`startAbilityForResult failed, code is ${err.code}, message is ${err.message}`)
             })
           })
+
+        Button('查看视频播放Demo')
+          .onClick(() => {
+            router.pushUrl({
+              url: 'pages/demos/VideoDemo'
+            })
+          })
       }
       .width('100%')
-      .height(300)
+      .height('100%')
       .backgroundColor(Color.Brown)
       .justifyContent(FlexAlign.Center)
 

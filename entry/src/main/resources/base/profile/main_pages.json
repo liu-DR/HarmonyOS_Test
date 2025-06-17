@@ -5,6 +5,7 @@
     "pages/components/MyMessage",
     "pages/demos/AppStorageDemo",
     "pages/demos/MeituanWaimai/Index",
-    "pages/cloud_music_pages/Index"
+    "pages/cloud_music_pages/Index",
+    "pages/demos/VideoDemo"
   ]
 }
