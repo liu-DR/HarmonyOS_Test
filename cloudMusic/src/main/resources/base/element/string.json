@@ -1,0 +1,16 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "module description"
+    },
+    {
+      "name": "CloudMusicAbility_desc",
+      "value": "HarmonyOS云音乐"
+    },
+    {
+      "name": "CloudMusicAbility_label",
+      "value": "云音乐"
+    }
+  ]
+}

@@ -8,7 +8,7 @@ export default struct MusicRecommendHeader {
     Row() {
       Row() {
         Image($r('app.media.gengduo'))
-          .width(24)
+          .width(20)
           .margin({ right: 20 })
           .onClick(() => {
             promptAction.showToast({ message: '打开更多左侧侧边栏' })
@@ -37,7 +37,7 @@ export default struct MusicRecommendHeader {
 
           Image($r('app.media.saoma'))
             .width(22)
-            .position({ right: 0, top: 0})
+            .position({ right: 0, top: 0 })
             .onClick(() => {
               console.info('2222222')
               promptAction.showToast({
@@ -46,10 +46,15 @@ export default struct MusicRecommendHeader {
               })
             })
         }
-        .height(42)
-        .backgroundColor('#f0f0f0')
+        .height(38)
+        .backgroundColor('#e8e9eb')
         .borderRadius(18)
-        .padding(12)
+        .padding({
+          top: 10,
+          bottom: 10,
+          left: 14,
+          right: 14
+        })
         .layoutWeight(1)
         .onClick(() => {
           promptAction.showToast({ message: '打开搜索页面' })
@@ -57,7 +62,7 @@ export default struct MusicRecommendHeader {
 
         // 扫描
         Image($r('app.media.yuyin'))
-          .width(28)
+          .width(24)
           .margin({ left: 16 })
           .onClick(() => {
             promptAction.showToast({ message: '打开听歌识曲页面' })
@@ -68,6 +73,5 @@ export default struct MusicRecommendHeader {
     .width('100%')
     .height(50)
     .padding({ left: 12, right: 12 })
-    .backgroundColor(Color.Orange)
   }
 }

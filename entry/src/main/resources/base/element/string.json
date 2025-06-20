@@ -11,14 +11,6 @@
     {
       "name": "EntryAbility_label",
       "value": "HarmonyOS_Test01"
-    },
-    {
-      "name": "CloudMusicAbility_desc",
-      "value": "HarmonyOS云音乐"
-    },
-    {
-      "name": "CloudMusicAbility_label",
-      "value": "云音乐"
     }
   ]
 }

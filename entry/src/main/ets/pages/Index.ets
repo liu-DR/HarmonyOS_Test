@@ -1,8 +1,7 @@
-import { promptAction, router } from '@kit.ArkUI';
+import { router } from '@kit.ArkUI';
 import { common } from '@kit.AbilityKit';
 
-import MusicRecommendHeader from './MusicRecommend/MusicHome';
-import ZhiHuCommentDemo from './demos/ZhiHuCommentDemo';
+// import MusicRecommendHeader from 'cloudmusic/src/main/ets/MusicRecommend/MusicHome';
 import { BusinessError } from '@kit.BasicServicesKit';
 
 PersistentStorage.persistProp<appStorageType>('userInfo', {
@@ -15,7 +14,8 @@ export interface appStorageType {
   user_token: string;
   user_name: string;
   user_id: string;
-};
+}
+;
 
 
 @Entry
@@ -23,12 +23,11 @@ export interface appStorageType {
 struct Index {
   @StorageProp('userInfo') userInfo: Partial<appStorageType> = {};
   @StorageProp('abilityParams') abilityParams: string = '';
-
   @State isShow: boolean = false;
 
   build() {
     Column({ space: 12 }) {
-      MusicRecommendHeader();
+      // MusicRecommendHeader();
 
       Column({ space: 12 }) {
         Text(this.userInfo.user_token).fontSize(30)
@@ -54,7 +53,7 @@ struct Index {
             })
           });
 
-        if(this.isShow) {
+        if (this.isShow) {
           Button('是否展示我')
         }
 
@@ -71,7 +70,7 @@ struct Index {
               }
             }).then((result: common.AbilityResult) => {
               console.info('startAbilityForResult succeed 1111111111');
-              if(result.want?.parameters?.id) {
+              if (result.want?.parameters?.id) {
                 this.isShow = true;
               }
             }).catch((err: BusinessError) => {
