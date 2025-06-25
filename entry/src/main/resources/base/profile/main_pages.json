@@ -5,6 +5,7 @@
     "pages/components/MyMessage",
     "pages/demos/AppStorageDemo",
     "pages/demos/MeituanWaimai/Index",
-    "pages/demos/VideoDemo"
+    "pages/demos/VideoDemo",
+    "pages/demos/CanvasDemo"
   ]
 }

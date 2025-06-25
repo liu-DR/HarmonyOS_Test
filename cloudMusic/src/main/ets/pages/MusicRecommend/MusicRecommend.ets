@@ -1,7 +1,7 @@
 import MusicRecommendHeader from './MusicRecommendHeader';
 
 import { tabContentStylesType } from './interface';
-import promptAction from '@ohos.promptAction';
+import MusicCommendContent from './MusicCommendContent';
 
 @Extend(TabContent)
 function tabContentStyles(styleProps: tabContentStylesType) {
@@ -38,24 +38,25 @@ export default struct MusicRecommend {
   ];
   private tabController = new TabsController();
 
-  @Builder
-  textCom(commendText: string) {
-    Scroll() {
-      Column({ space: 12 }) {
-        Button(commendText)
-          .fontSize(40)
-          .onClick(() => {
-            // this.showLeftContent = true;
-            promptAction.openCustomDialog({
-              builder: () => this.textCom('测试弹窗'),
-              width: 200,
-              height: 200
-            })
-          })
-      }
-    }
+  @Styles
+  defaultStyles() {
     .width('100%')
     .height('100%')
+  };
+
+  @Builder
+  textCom(props: tabContentStylesType) {
+    Scroll() {
+      if (props.id === 0) {
+        MusicCommendContent();
+      } else {
+        Column({ space: 12 }) {
+          Button('推荐')
+            .fontSize(40)
+        }
+      }
+    }
+    .defaultStyles()
     .padding(12)
     .scrollBarWidth(0)
   };
@@ -68,14 +69,13 @@ export default struct MusicRecommend {
         Tabs({ controller: this.tabController, index: this.activeKey }) {
           ForEach(this.tabsItems, (item: tabContentStylesType) => {
             TabContent() {
-              this.textCom(item.text)
+              this.textCom(item);
             }.tabContentStyles({ text: item.text, id: item.id })
           })
         }
-        .height('100%')
-        .width('100%')
+        .defaultStyles()
         .barHeight(50)
-        .scrollable(true)
+        .scrollable(false)
         .divider({
           strokeWidth: 0.5,
           color: '#f1f2f7'
@@ -85,34 +85,53 @@ export default struct MusicRecommend {
         .onChange((index) => {
           this.activeKey = index;
         })
-
       }
-      .height('100%')
-      .width('100%')
+      .defaultStyles()
       .alignItems(HorizontalAlign.Start)
 
       if (this.showLeftContent) {
         // 侧边栏
         Column() {
-          Column() {
-            Text('侧边栏')
+          Row() {
+            Column() {
+              Text('侧边栏')
+            }
+            .width('80%')
+            .height('100%')
+            .backgroundColor(Color.White)
+            .opacity(1)
+            .expandSafeArea([SafeAreaType.SYSTEM])
+            .onClick((event) => {
+              event.preventDefault();
+            })
           }
-          .width('80%')
-          .height('100%')
-          .backgroundColor(Color.White)
-          .expandSafeArea([SafeAreaType.SYSTEM])
         }
-        .width('100%')
-        .height('100%')
-        .backgroundColor('#ccc')
+        .defaultStyles()
         .position({ top: 0, left: 0 })
         .alignItems(HorizontalAlign.Start)
+        .backgroundColor('#33000000')
         .onClick(() => {
-          this.showLeftContent = false;
+          animateTo({
+            duration: 400
+          }, () => {
+            this.showLeftContent = false;
+          })
+        })
+        .transition({
+          type: TransitionType.Insert,
+          translate: {
+            x: '-100%'
+          }
+        })
+        .transition({
+          type: TransitionType.Delete,
+          translate: {
+            x: '-100%'
+          },
+          opacity: 0
         })
       }
     }
-    .width('100%')
-    .height('100%')
+    .defaultStyles()
   }
 }

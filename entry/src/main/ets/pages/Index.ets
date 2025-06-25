@@ -84,6 +84,13 @@ struct Index {
               url: 'pages/demos/VideoDemo'
             })
           })
+
+        Button('前往Canvas')
+          .onClick(() => {
+            router.pushUrl({
+              url: 'pages/demos/CanvasDemo'
+            })
+          })
       }
       .width('100%')
       .height('100%')
