@@ -91,6 +91,13 @@ struct Index {
               url: 'pages/demos/CanvasDemo'
             })
           })
+
+        Button('获取首选项')
+          .onClick(() => {
+            router.pushUrl({
+              url: 'pages/demos/WeChat'
+            })
+          })
       }
       .width('100%')
       .height('100%')

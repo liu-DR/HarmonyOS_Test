@@ -6,6 +6,7 @@
     "pages/demos/AppStorageDemo",
     "pages/demos/MeituanWaimai/Index",
     "pages/demos/VideoDemo",
-    "pages/demos/CanvasDemo"
+    "pages/demos/CanvasDemo",
+    "pages/demos/WeChat"
   ]
 }
